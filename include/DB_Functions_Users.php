@@ -24,15 +24,12 @@ class DB_Functions {
 	 * http://localhost/Inovea/user.php?tag=register&mail=oussama@gmail.com&password=myPassword&name=Bentalha&firstname=Oussama&scheduler=0
      */
     public function storeUser($mail, $password, $name, $firstname, $scheduler) {
-        $uuid = uniqid('', true);
 		$encrypted_password = sha1($password);
         //$result = mysql_query("INSERT INTO Courier(idCourier, mail, encrypted_password, salt, name, firstname, scheduler) VALUES('$uuid', '$mail', '$password', '$salt', '$name', '$firstname', '$scheduler')");
-		$result = mysql_query("INSERT INTO Courier(idCourier, mail, encrypted_password, name, firstname, scheduler) VALUES('$uuid', '$mail', '$encrypted_password', '$name', '$firstname', '$scheduler')");
+		$result = mysql_query("INSERT INTO Courier(mail, encrypted_password, name, firstname, scheduler) VALUES('$mail', '$encrypted_password', '$name', '$firstname', '$scheduler')") or die(mysql_error());
         // check for successful store
         if ($result) {
-            // get user details 
-            $uid = mysql_insert_id(); // last inserted id
-            $result = mysql_query("SELECT * FROM Courier WHERE idCourier = $uid");
+            $result = mysql_query("SELECT * FROM Courier WHERE mail = '$mail'");
             // return user details
             return mysql_fetch_array($result);
         } else {

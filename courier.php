@@ -56,7 +56,7 @@ if (isset($_GET['tag']) && $_GET['tag'] != '') {
         // check if user is already existed
         if ($db->isUserExisted($mail)) {
             // user is already existed - error response
-            $response["error"] = "1";
+            $response["error"] = "2";
             $response["error_msg"] = "User already existed";
             echo json_encode($response);
         } else {
