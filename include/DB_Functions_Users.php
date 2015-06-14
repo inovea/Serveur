@@ -37,12 +37,11 @@ class DB_Functions {
         }
     }
 	
-	public function update($idCourier, $name, $firstname, $mail, $password, $scheduler) {
+	public function update($idCourier, $name, $firstname, $mail, $scheduler) {
 		$encrypted_password = sha1($password);
-		$result = mysql_query("UPDATE Courier SET name = '$name', firstname = '$firstname', mail = '$mail', encrypted_password = '$encrypted_password', scheduler = '$scheduler' WHERE idCourier = '$idCourier'") or die(mysql_error());
+		$result = mysql_query("UPDATE Courier SET name = '$name', firstname = '$firstname', mail = '$mail', scheduler = '$scheduler' WHERE idCourier = '$idCourier'") or die(mysql_error());
 		if ($result) {
-            $uid = mysql_insert_id(); // last inserted id
-            $result = mysql_query("SELECT * FROM Courier WHERE idCourier = $uid");
+            $result = mysql_query("SELECT * FROM Courier WHERE idCourier = $idCourier");
             return mysql_fetch_array($result);
         } else {
             return false;

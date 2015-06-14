@@ -121,10 +121,9 @@ if (isset($_GET['tag']) && $_GET['tag'] != '') {
 		$name = $_GET['name'];
 		$firstname = $_GET['firstname'];
         $mail = $_GET['mail'];
-        $password = $_GET['password'];
 		$scheduler = $_GET['scheduler'];
 		
-		$user = $db->update($idCourier, $name, $firstname, $mail, $password, $scheduler);
+		$user = $db->update($idCourier, $name, $firstname, $mail, $scheduler);
 		if ($user != false) {
 			$response["error"] = "0";
             $response["user"]["idCourier"] = $user["idCourier"];
