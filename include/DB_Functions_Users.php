@@ -48,6 +48,18 @@ class DB_Functions {
         }
 	}
 	
+	public function changePassword($mail, $password){
+		$encrypted_password = sha1($password);
+		
+		$result = mysql_query("UPDATE Courier SET encrypted_password = '$encrypted_password' WHERE mail = '$mail'") or die(mysql_error());			
+        if ($result) {
+            $result = mysql_query("SELECT * FROM Courier WHERE mail = '$mail'");
+            return mysql_fetch_array($result);
+        } else {
+            return false;
+        }
+	}
+	
 	public function delete($idCourier){
 		$result = mysql_query("DELETE FROM Courier WHERE idCourier = '$idCourier'") or die(mysql_error());
 		if ($result) {

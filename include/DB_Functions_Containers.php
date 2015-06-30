@@ -18,12 +18,13 @@ class DB_Functions {
          
     }
 	
-	public function createContainer($name, $lat, $lng) {
+	public function createContainer($name, $lat, $lng, $address) {
 		echo "createContainer";
 			echo $name;
 			echo $lat;
 			echo $lng;
-        $result = mysql_query("INSERT INTO Container(name, lat, lng, state, Errand_idErrand) VALUES('$name', '$lat', '$lng', 0, 1)");
+			echo $address;
+        $result = mysql_query("INSERT INTO Container(name, lat, lng, address, state, Errand_idErrand) VALUES('$name', '$lat', '$lng', '$address', 0, 1)");
 		echo $result;
         if ($result) {
             $uid = mysql_insert_id(); 

@@ -27,8 +27,9 @@ if (isset($_GET['tag']) && $_GET['tag'] != '') {
 			$name = $_GET['name'];
 			$lat = $_GET['lat'];
 			$lng = $_GET['lng'];
+			$address = $_GET['address'];
 			
-			$container = $db->createContainer($name, $lat, $lng);
+			$container = $db->createContainer($name, $lat, $lng, $address);
 			if ($container) {
                 $response["error"] = "0";
 				$response["container"]["idContainer"] = $container["idContainer"];

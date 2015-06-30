@@ -152,6 +152,31 @@ if (isset($_GET['tag']) && $_GET['tag'] != '') {
             echo json_encode($response);
         }
 		
+    } else if ($tag == 'changeWord') {
+		
+		$mail = $_GET['mail'];
+		$password = $_GET['word1'];
+		$newpassword = $_GET['word2'];
+		
+		$user = $db->getUserByEmailAndPassword($mail, $password);
+        if ($user != false) {
+            $user = $db->changePassword($mail, $newpassword);
+			if ($user != false) {
+				$response["error"] = "0"; 
+				echo json_encode($response);
+			} else {
+				$response["error"] = "1";
+				$response["error_msg"] = "Impossible de modifier le mot de passe!";
+				echo json_encode($response);
+			}
+        } else {
+            $response["error"] = "2";
+            $response["error_msg"] = "Incorrect password!";
+            echo json_encode($response);
+        }
+		
+		
+		
     } else {
         // user failed to store
         $response["error"] = "1";
