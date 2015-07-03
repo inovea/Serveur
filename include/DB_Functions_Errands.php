@@ -22,8 +22,8 @@ class DB_Functions {
      * Storing new errand
      * returns errand details
      */
-    public function createErrand($dateDebut) {
-        $result = mysql_query("INSERT INTO Errand(state, dateDebut) VALUES(0, '$dateDebut')");
+    public function createErrand($dateDebut, $duree, $distance) {
+        $result = mysql_query("INSERT INTO Errand(state, dateDebut, duree, distance) VALUES(0, '$dateDebut', '$duree', '$distance')");
         // check for successful store
         if ($result) {
             // get user details 

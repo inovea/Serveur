@@ -25,7 +25,9 @@ if (isset($_GET['tag']) && $_GET['tag'] != '') {
 		
 		case "create" : 
 			$dateDebut = $_GET['dateDebut'];
-			$errand = $db->createErrand($dateDebut);
+			$duree = $_GET['duree'];
+			$distance = $_GET['distance'];
+			$errand = $db->createErrand($dateDebut, $duree, $distance);
 			if ($errand) {
                 $response["error"] = "0";
 				$response["errand"]["idErrand"] = $errand["idErrand"];
