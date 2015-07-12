@@ -177,6 +177,31 @@ if (isset($_GET['tag']) && $_GET['tag'] != '') {
 		
 		
 		
+    } 
+    else if ($tag == 'resetPassword') {
+        $password = "Inovea75Reset";
+        $mail = $_GET['mail'];
+        if($db->isUserExisted($mail) != false){
+            if($db->changePassword($mail, $password) != false){
+                if($db->sendMail($mail, $password) != null){
+                    $response["error"] = "0";
+                    $response["error_msg"] = "Initialisation du mot de passe reussi!";
+                    echo json_encode($response);
+                } else {
+                    $response["error"] = "1";
+                    $response["error_msg"] = "Impossible d'envoyer le mail!";
+                    echo json_encode($response);
+                }
+            } else {
+                $response["error"] = "2";
+                $response["error_msg"] = "Impossible d'initialiser le mot de passe!";
+                echo json_encode($response);
+            }
+        } else {
+            $response["error"] = "3";
+            $response["error_msg"] = "Utilisateur non existant!";
+            echo json_encode($response);
+        }
     } else {
         // user failed to store
         $response["error"] = "1";

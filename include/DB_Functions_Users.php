@@ -124,6 +124,32 @@ class DB_Functions {
             return false;
         }
     }
+
+
+    public function sendMail($mail, $password) {
+        // PREPARE THE BODY OF THE MESSAGE
+        $message = '<html><body>';
+        //$message .= '<img src="http://css-tricks.com/examples/WebsiteChangeRequestForm/images/wcrf-header.png" alt="Website Change Request" />';
+        $message .= '<table rules="all" style="border-color: #666;" cellpadding="10">';
+        $message .= "<tr style='background: #eee;'><td><strong>Utilisateur : </strong> </td><td>" . $mail . "</td></tr>";
+        $message .= "<tr><td><strong>Nouveau mot de passe : </strong> </td><td>" . $password . "</td></tr>";
+        //$addURLS = $_POST['addURLS'];
+        $message .= "</table>";
+        $message .= "</body></html>";
+ 
+        $subject = 'Initialisation de votre mot de passe';
+            
+        $headers = "From: inovea.esgi@gmail.com \r\n";
+        $headers .= "Reply-To: ". $mail . "\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+        if (mail($mail, $subject, $message, $headers)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
  
 ?>
