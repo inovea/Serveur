@@ -15,7 +15,7 @@ class DB_Functions {
     }
  
     public function createAlert($state, $description, $author, $idContainer) {
-        $result = mysql_query("INSERT INTO Alert(state, description, date, author, Container_idContainer) VALUES('$state', '$description', NOW(), '$author', '$idContainer')");
+        $result = mysql_query("INSERT INTO Alert(state, description, date, author, Container_idContainer) VALUES('$state', '$description', NOW()+ INTERVAL 6 HOUR, '$author', '$idContainer')");
         if ($result) {
             $uid = mysql_insert_id(); 
             $result = mysql_query("SELECT * FROM Alert WHERE idAlert = $uid");
