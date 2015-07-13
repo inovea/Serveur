@@ -20,10 +20,6 @@ class DB_Functions {
 	
 	public function createContainer($name, $lat, $lng, $address) {
 		echo "createContainer";
-			echo $name;
-			echo $lat;
-			echo $lng;
-			echo $address;
         $result = mysql_query("INSERT INTO Container(name, lat, lng, address, state, Errand_idErrand) VALUES('$name', '$lat', '$lng', '$address', 0, 1)");
 		echo $result;
         if ($result) {
