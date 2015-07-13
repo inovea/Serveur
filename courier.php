@@ -1,5 +1,6 @@
 <?php
- 
+ header('Access-Control-Allow-Origin: *');
+ header('Access-Control-Allow-Methods: GET, PUT, DELETE');
 /**
  * File to handle all API requests
  * Accepts GET and POST
@@ -179,7 +180,7 @@ if (isset($_GET['tag']) && $_GET['tag'] != '') {
 		
     } 
     else if ($tag == 'resetPassword') {
-        $password = "Inovea75Reset";
+        $password = getMeRandomPwd(10);
         $mail = $_GET['mail'];
         if($db->isUserExisted($mail) != false){
             if($db->changePassword($mail, $password) != false){
@@ -214,5 +215,11 @@ if (isset($_GET['tag']) && $_GET['tag'] != '') {
     $response["error"] = "1";
     $response["error_msg"] = "Required parameter 'tag' is missing!";
     echo json_encode($response);
+}
+
+function getMeRandomPwd($length){
+    $a = str_split("abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXY0123456789"); 
+    shuffle($a);
+    return substr( implode($a), 0, $length );
 }
 ?>

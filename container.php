@@ -1,5 +1,7 @@
+
 <?php
- 
+ header('Access-Control-Allow-Origin: *');
+ header('Access-Control-Allow-Methods: GET, PUT, DELETE');
 /**
  * File to handle all API requests
  * Accepts GET and POST
