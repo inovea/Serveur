@@ -32,15 +32,15 @@ class DB_Functions {
     }
 	
 	public function update($idContainer, $name, $lat, $lng, $state, $lastCollect, $address, $idErrand) {
-	echo "update"; 
 		$result = mysql_query("UPDATE Container SET name = '$name', lat = '$lat', lng = '$lng', state = '$state', lastCollect = '$lastCollect', address = '$address', Errand_idErrand = '$idErrand' WHERE idContainer = '$idContainer'") or die(mysql_error());
 		if ($result) {
-            //$uid = mysql_insert_id();
-            $result = mysql_query("SELECT * FROM container WHERE idContainer = '$idContainer'");
-            $no_of_rows = mysql_num_rows($result);
-			if ($no_of_rows > 0) {
-				return mysql_fetch_array($result);
-			}
+            $container = mysql_query("SELECT * FROM Container WHERE idContainer = '$idContainer'");
+            if($container){
+                return mysql_fetch_array($container);    
+            } else{
+                return false;
+            }
+            
         } else {
             return false;
         }
