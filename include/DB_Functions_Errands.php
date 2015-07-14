@@ -47,7 +47,7 @@ class DB_Functions {
 	}
 	
 	public function delete($idErrand){
-		$result = mysql_query("DELETE FROM Errand WHERE idErrand = '$idErrand'") or die(mysql_error());
+		$result = mysql_query("DELETE FROM Errand WHERE idErrand ='$idErrand'") or die(mysql_error());
 		if ($result) {
             return $result;
         } else {

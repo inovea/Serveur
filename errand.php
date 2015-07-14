@@ -74,15 +74,15 @@ if (isset($_GET['tag']) && $_GET['tag'] != '') {
 			break;
 			
 		case "delete" : 
-			$id = $_GET['idErrand'];
-			$errand = $db->delete($idCourier);
-		if ($errand) {
-			$response["error"] = "0";
-            echo json_encode($response);
-        } else {
-            $response["error"] = "1";
-            $response["error_msg"] = "Suppression impossible!";
-            echo json_encode($response);
+			$idErrand = $_GET['idErrand'];
+			$errand = $db->delete($idErrand);
+			if ($errand) {
+				$response["error"] = "0";
+				echo json_encode($response);
+			} else {
+				$response["error"] = "1";
+				$response["error_msg"] = "Suppression impossible!";
+				echo json_encode($response);
         }
 			break;
 			
