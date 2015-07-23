@@ -24,7 +24,7 @@ if (isset($_GET['tag']) && $_GET['tag'] != '') {
  
     switch($tag){
 		
-		case "create" : 
+		case "createWithoutCourier" : 
 			$dateDebut = $_GET['dateDebut'];
 			$duree = $_GET['duree'];
 			$distance = $_GET['distance'];
@@ -45,6 +45,30 @@ if (isset($_GET['tag']) && $_GET['tag'] != '') {
                 echo json_encode($response);
             }
 			break;
+
+		case "create" : 
+			$dateDebut = $_GET['dateDebut'];
+			$duree = $_GET['duree'];
+			$distance = $_GET['distance'];
+			$idCourier = $_GET['idCourier'];
+			$errand = $db->createErrandWithCourier($dateDebut, $duree, $distance, $idCourier);
+			if ($errand) {
+                $response["error"] = "0";
+				$response["errand"]["idErrand"] = $errand["idErrand"];
+				$response["errand"]["state"] = $errand["state"];
+				$response["errand"]["dateDebut"] = $errand["dateDebut"];
+				$response["errand"]["dateFin"] = $errand["dateFin"];
+				$response["errand"]["duree"] = $errand["duree"];
+				$response["errand"]["distance"] = $errand["distance"];
+				$response["errand"]["Courier_idCourier"] = $errand["Courier_idCourier"];
+                echo json_encode($response);
+            } else {
+                $response["error"] = "1";
+                $response["error_msg"] = "Error occured in creating Errand";
+                echo json_encode($response);
+            }
+			break;
+
 			
 		case "update" : 
 			$idErrand = $_GET['idErrand'];

@@ -35,6 +35,24 @@ class DB_Functions {
             return false;
         }
     }
+
+    /**
+     * Storing new errand with Courier
+     * returns errand details
+     */
+    public function createErrandWithCourier($dateDebut, $duree, $distance, $idCourier) {
+        $result = mysql_query("INSERT INTO Errand(state, dateDebut, duree, distance, Courier_idCourier) VALUES(0, '$dateDebut', '$duree', '$distance', '$idCourier')");
+        // check for successful store
+        if ($result) {
+            // get user details 
+            $uid = mysql_insert_id(); // last inserted id
+            $result = mysql_query("SELECT * FROM Errand WHERE idErrand = $uid");
+            // return user details
+            return mysql_fetch_array($result);
+        } else {
+            return false;
+        }
+    }
 	
 	public function update($idErrand, $state, $dateDebut, $dateFin, $duree, $distance, $idCourier) {
 		$result = mysql_query("UPDATE Errand SET state = '$state', dateDebut = '$dateDebut', dateFin = '$dateFin', duree = '$duree', distance = '$distance', Courier_idCourier = '$idCourier' WHERE idErrand = '$idErrand'") or die(mysql_error());
@@ -77,7 +95,7 @@ class DB_Functions {
 	 http://localhost/Inovea/errand.php?tag=getAll
      */
     public function getAll(){
-        $result = mysql_query("SELECT * FROM Errand ") or die(mysql_error());
+        $result = mysql_query("SELECT * FROM Errand WHERE idErrand != 1") or die(mysql_error());
         $no_of_rows = mysql_num_rows($result);
 		if ($no_of_rows > 0) {
 			return $result;
